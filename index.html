@@ -38,7 +38,9 @@ button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
 
 /* ---------- Sobre ---------- */
-.hero{display:flex;flex-direction:column;align-items:center;gap:28px;padding-top:120px;text-align:center;overflow-x:clip}
+.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;min-height:100vh;min-height:100svh;padding-block:110px 40px;text-align:center;overflow-x:clip}
+#rest{display:flex;flex-direction:column;gap:88px}
+#rest[hidden]{display:none}
 .hero-kicker{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .env{position:relative;width:min(560px,100%);aspect-ratio:1.62;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .env.open{cursor:default}
@@ -208,7 +210,7 @@ td.save{color:var(--ok)}
 .foot{font-size:.82rem;color:var(--muted);text-align:center;max-width:680px;margin:0 auto}
 
 @media (max-width:760px){
-  .hero{padding-top:96px}
+  .hero{padding-block:96px 32px}
   .turtle{left:-2%;top:-30%}
   .pass{grid-template-columns:1fr}
   .pass-stub{border-left:0;border-top:2px dashed var(--line)}
@@ -270,6 +272,7 @@ td.save{color:var(--ok)}
     <p class="tap-hint" id="tapHint">Toca el sobre o el botón</p>
   </section>
 
+  <div id="rest" hidden>
   <article class="letter" id="carta" aria-label="Carta">
     <p class="eyebrow">Una carta para ti</p>
     <h1>Feliz cumpleaños, Tortuga Hembra</h1>
@@ -370,6 +373,7 @@ td.save{color:var(--ok)}
     </div>
     <p class="foot" id="rates">Tasas de octubre de 2026: 1 € = COP 3.550 · 1 US$ = COP 3.170. Los horarios y precios se confirman al comprar.</p>
   </section>
+  </div>
 </main>
 
 <script>
@@ -520,6 +524,7 @@ musicBtn.addEventListener("click", () => { if (song.paused) playSong(); else { s
 function openEnvelope(){
   if (env.classList.contains("open")) { goLetter(); return; }
   musicBtn.hidden = false;
+  document.getElementById("rest").hidden = false;
   playSong();
   env.classList.add("open");
   btn.classList.remove("pulse");
