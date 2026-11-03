@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<style>[hidden]{display:none!important}html{color-scheme:light dark}body{margin:0}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Para mi Tortuga Hembra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@500;700&display=swap">
+<style>
+/* Layout: correo aéreo — un sobre que se abre, una carta, un pase de abordar de regalo y el plan del viaje en una sola columna con el itinerario a dos columnas en pantallas grandes */
+:root{
+  --bg:#E6ECF4; --paper:#FBFCFE; --paper-2:#EEF2F8; --ink:#14213D; --muted:#56627C; --line:#D3DBE8;
+  --red:#C2343F; --blue:#21468C; --stamp:#C2343F; --ok:#2E7D5B; --turtle:#5E9C76; --shell:#2F6B4F; --shell-2:#3F8261;
+  --f-display:"Young Serif", Georgia, "Times New Roman", serif;
+  --f-body:"Manrope", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --f-hand:"Caveat", "Bradley Hand", "Segoe Script", cursive;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1324; --paper:#172038; --paper-2:#1E2945; --ink:#E8EDF7; --muted:#9BA7C3; --line:#2C3A5E;
+  --red:#E25A63; --blue:#7BA0E8; --stamp:#C2343F; --ok:#5CC296; --turtle:#6FB389; --shell:#2E6A4E; --shell-2:#3C8462; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1324; --paper:#172038; --paper-2:#1E2945; --ink:#E8EDF7; --muted:#9BA7C3; --line:#2C3A5E;
+  --red:#E25A63; --blue:#7BA0E8; --stamp:#C2343F; --ok:#5CC296; --turtle:#6FB389; --shell:#2E6A4E; --shell-2:#3C8462; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+main{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:88px}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-wrap:balance;margin:0;line-height:1.15}
+h2{font-size:clamp(1.8rem,4vw,2.5rem)}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.section-head{display:flex;flex-direction:column;gap:10px;max-width:640px}
+.section-head p{color:var(--muted)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
+
+/* ---------- Sobre ---------- */
+.hero{display:flex;flex-direction:column;align-items:center;gap:28px;padding-top:120px;text-align:center;overflow-x:clip}
+.hero-kicker{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.env{position:relative;width:min(560px,100%);aspect-ratio:1.62;perspective:1400px}
+.env-back{position:absolute;inset:0;border-radius:8px;background:var(--paper-2);
+  border:12px solid transparent;
+  border-image:repeating-linear-gradient(135deg,var(--red) 0 16px,var(--paper) 16px 22px,var(--blue) 22px 38px,var(--paper) 38px 44px) 12;
+  box-shadow:0 24px 50px -24px rgba(20,33,61,.45)}
+.env-card{position:absolute;left:9%;right:9%;top:10%;height:78%;z-index:2;background:var(--paper);border-radius:6px;
+  box-shadow:0 6px 18px -10px rgba(20,33,61,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  transition:transform .8s cubic-bezier(.2,.8,.2,1) .45s;padding:12px}
+.env-card .hb{font-family:var(--f-display);font-size:clamp(1.3rem,4.4vw,2rem);color:var(--red)}
+.env-card .hb-sub{font-family:var(--f-hand);font-size:clamp(1.2rem,3.6vw,1.6rem);color:var(--ink)}
+.env-front{position:absolute;inset:12px;z-index:3;background:var(--paper);border-radius:2px;
+  clip-path:polygon(0 0,50% 54%,100% 0,100% 100%,0 100%)}
+.env-flap{position:absolute;left:12px;right:12px;top:12px;height:58%;z-index:4;background:var(--paper-2);
+  clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top center;
+  transition:transform .7s cubic-bezier(.3,.7,.2,1), z-index 0s .35s}
+.env-flap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(20,33,61,.08))}
+.env.open .env-flap{transform:rotateX(180deg);z-index:1;transition-delay:1.35s,1.7s}
+.env.open .env-card{transform:translateY(-62%);transition-delay:1.9s}
+/* la tortuga corta el sobre volando */
+.env-cut{position:absolute;z-index:7;left:12px;right:12px;top:10px;height:3px;transform:scaleX(0);transform-origin:left center;
+  background:repeating-linear-gradient(90deg,var(--red) 0 8px,transparent 8px 13px)}
+.env.open .env-cut{animation:cut 1.6s cubic-bezier(.45,.05,.4,1) .25s forwards, cutfade .4s 1.95s forwards}
+@keyframes cut{0%{transform:scaleX(0)}100%{transform:scaleX(.82)}}
+@keyframes cutfade{to{opacity:0}}
+/* tortuga */
+.turtle{position:absolute;z-index:9;left:-3%;top:-27%;width:clamp(96px,27%,150px);pointer-events:none;animation:bob 3.2s ease-in-out infinite;transform-origin:50% 100%}
+.turtle .t-body{fill:var(--turtle)}.turtle .t-shell{fill:var(--shell)}.turtle .t-hex{fill:var(--shell-2);stroke:var(--turtle);stroke-width:1.5}
+.turtle .t-eye{fill:var(--ink)}.turtle .t-cheek{fill:var(--red);opacity:.35}.turtle .t-smile{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round}
+.turtle .t-cap{fill:var(--blue)}.turtle .t-goggle{fill:var(--paper);stroke:var(--ink);stroke-width:1.6}.turtle .t-scarf{fill:var(--red)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.env.open .turtle{animation:flyturtle 1.6s cubic-bezier(.45,.05,.4,1) .25s forwards, bob 3.2s ease-in-out 2.2s infinite}
+@keyframes flyturtle{0%{left:-3%;transform:translateY(0) rotate(0)}12%{transform:translateY(-22px) rotate(-10deg)}50%{transform:translateY(-38px) rotate(3deg)}85%{transform:translateY(-12px) rotate(-3deg)}100%{left:72%;transform:translateY(0) rotate(0)}}
+.turtle .t-wind{stroke:var(--muted);stroke-width:2.5;stroke-linecap:round;opacity:0}
+.env.open .turtle .t-wind{animation:wind 1.6s ease-in-out .25s}
+@keyframes wind{10%,80%{opacity:.8}100%{opacity:0}}
+.turtle .t-tail{transform-box:fill-box;transform-origin:top right}
+.env.open .turtle .t-tail{animation:flutter .18s ease-in-out .25s 9 alternate}
+@keyframes flutter{to{transform:rotate(-14deg)}}
+.env-address{position:absolute;z-index:5;left:9%;right:32%;bottom:9%;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:2px;pointer-events:none}
+.env-address .to{font-family:var(--f-hand);font-size:clamp(1.5rem,5.2vw,2.4rem);line-height:1.05}
+.env-address .from{font-family:var(--f-hand);font-size:clamp(1.1rem,3.4vw,1.4rem);color:var(--muted)}
+.par-avion{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);border:1.5px solid var(--blue);padding:2px 8px;border-radius:3px;margin-bottom:8px}
+.stamp{position:absolute;z-index:5;right:9%;bottom:12%;width:clamp(64px,16%,88px);aspect-ratio:.82;background:var(--stamp);
+  outline:3px dotted var(--paper);outline-offset:-5px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:#FBFCFE;font-family:var(--f-mono);font-size:clamp(.55rem,1.6vw,.7rem);line-height:1.25;letter-spacing:.06em;transform:rotate(4deg)}
+.stamp b{font-family:var(--f-display);font-weight:400;font-size:1.5em}
+.postmark{position:absolute;z-index:6;right:7%;top:22%;width:clamp(70px,18%,96px);aspect-ratio:1;border:2px solid var(--blue);border-radius:50%;
+  opacity:.7;display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--f-mono);font-size:clamp(.5rem,1.4vw,.62rem);
+  letter-spacing:.08em;color:var(--blue);transform:rotate(-14deg);pointer-events:none;padding:6px}
+.open-btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;background:var(--red);color:#FBFCFE;
+  padding:14px 28px;font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 10px 24px -12px var(--red)}
+.open-btn:hover{filter:brightness(1.07)}
+
+/* ---------- Carta ---------- */
+.letter{max-width:680px;width:100%;margin:0 auto;background:var(--paper);border-radius:4px;padding:clamp(28px,6vw,56px);
+  background-image:repeating-linear-gradient(180deg,transparent 0 33px,var(--line) 33px 34px);background-position:0 18px;
+  box-shadow:0 30px 60px -40px rgba(20,33,61,.5);display:flex;flex-direction:column;gap:20px;position:relative}
+.letter::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;border-radius:4px 4px 0 0;
+  background:repeating-linear-gradient(135deg,var(--red) 0 12px,var(--paper) 12px 16px,var(--blue) 16px 28px,var(--paper) 28px 32px)}
+.letter h1{font-size:clamp(2rem,6vw,3.1rem);color:var(--red)}
+.letter p{font-size:1.07rem;line-height:1.85;max-width:62ch}
+.letter .sign{font-family:var(--f-hand);font-size:2rem;line-height:1.1;color:var(--blue);margin-top:6px}
+.letter .sign small{display:block;font-family:var(--f-body);font-size:.95rem;color:var(--muted)}
+
+/* ---------- Pase de abordar ---------- */
+.pass-wrap{display:flex;flex-direction:column;gap:24px;align-items:center}
+.pass{width:100%;max-width:900px;display:grid;grid-template-columns:minmax(0,1fr) 260px;background:var(--paper);border-radius:18px;
+  box-shadow:0 30px 60px -36px rgba(20,33,61,.55);position:relative;overflow:hidden}
+.pass-main{padding:26px 28px;display:flex;flex-direction:column;gap:22px;min-width:0}
+.pass-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.pass-brand{font-family:var(--f-display);font-size:1.15rem}
+.pass-brand span{color:var(--red)}
+.pass-tag{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;background:var(--red);color:#FBFCFE;padding:4px 10px;border-radius:999px}
+.legs{display:flex;flex-direction:column;gap:16px}
+.leg{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px}
+.iata{display:flex;flex-direction:column;min-width:0}
+.iata b{font-family:var(--f-mono);font-weight:600;font-size:clamp(1.9rem,6vw,2.6rem);letter-spacing:.02em;line-height:1}
+.iata small{font-size:.8rem;color:var(--muted)}
+.iata.right{text-align:right}
+.leg-line{position:relative;height:2px;background:repeating-linear-gradient(90deg,var(--muted) 0 6px,transparent 6px 12px)}
+.leg-line svg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:26px;height:26px;background:var(--paper);padding:2px}
+.leg-line svg path{fill:var(--blue)}
+.leg-date{grid-column:1/-1;font-family:var(--f-mono);font-size:.78rem;color:var(--muted);letter-spacing:.06em;margin-top:-6px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:14px 18px;border-top:1px dashed var(--line);padding-top:18px}
+.field{display:flex;flex-direction:column;gap:2px;min-width:0}
+.field span{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.field b{font-weight:700;font-size:.98rem}
+.pass-stub{border-left:2px dashed var(--line);padding:26px 22px;display:flex;flex-direction:column;justify-content:space-between;gap:16px;background:var(--paper-2);position:relative}
+.pass::before,.pass::after{content:"";position:absolute;width:28px;height:28px;border-radius:50%;background:var(--bg);right:246px;z-index:2}
+.pass::before{top:-14px}.pass::after{bottom:-14px}
+.vale{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.vale-big{font-family:var(--f-display);font-size:1.45rem;line-height:1.2}
+.barcode{width:100%;height:58px;display:block}
+.barcode rect{fill:var(--ink)}
+.countdown{font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.countdown b{font-family:var(--f-display);font-weight:400;font-size:1.6rem;color:var(--ink);display:block;line-height:1.1}
+.fine{font-size:.85rem;color:var(--muted);max-width:640px;text-align:center}
+
+/* ---------- Ruta + días ---------- */
+.trip{display:grid;grid-template-columns:300px minmax(0,1fr);gap:32px;align-items:start}
+.route{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px)}
+.stop{display:grid;grid-template-columns:22px 1fr;gap:12px}
+.stop-rail{display:flex;flex-direction:column;align-items:center}
+.stop-dot{width:14px;height:14px;border-radius:50%;border:3px solid var(--blue);background:var(--paper);margin-top:12px;flex:none}
+.stop-bar{flex:1;width:2px;background:repeating-linear-gradient(180deg,var(--line) 0 5px,transparent 5px 9px);min-height:18px}
+.stop:last-child .stop-bar{display:none}
+.stop-btn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;padding:8px 12px;border-radius:10px;width:100%}
+.stop-btn:hover{background:var(--paper-2)}
+.stop-btn:focus-visible{outline:3px solid var(--blue)}
+.stop-btn[aria-pressed="true"]{background:var(--paper);box-shadow:0 8px 20px -14px rgba(20,33,61,.5)}
+.stop:has(.stop-btn[aria-pressed="true"]) .stop-dot{background:var(--red);border-color:var(--red)}
+.stop-name{font-family:var(--f-display);font-size:1.12rem;display:flex;justify-content:space-between;gap:8px}
+.stop-name em{font-style:normal;font-family:var(--f-mono);font-size:.7rem;color:var(--muted);align-self:center;white-space:nowrap}
+.stop-meta{font-size:.8rem;color:var(--muted)}
+.stop-leg{font-family:var(--f-mono);font-size:.68rem;color:var(--blue);letter-spacing:.04em;padding:2px 12px 6px}
+.days{display:flex;flex-direction:column;gap:18px;min-width:0}
+.days-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.days-head h3{font-size:1.9rem}
+.days-head p{color:var(--muted);font-size:.9rem}
+.day{background:var(--paper);border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 14px 30px -26px rgba(20,33,61,.6)}
+.day-top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.day-num{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+.day-title{font-family:var(--f-display);font-weight:400;font-size:1.3rem;line-height:1.2;margin:0;text-wrap:balance}
+.day-total{font-family:var(--f-mono);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.day-total span{color:var(--muted);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin-right:6px}
+.items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.item{display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:12px;padding:8px 0;border-top:1px solid var(--line);font-size:.94rem}
+.item time{font-family:var(--f-mono);font-size:.8rem;color:var(--blue);padding-top:2px}
+.item .cost{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:2px}
+.day-note{font-size:.88rem;color:var(--muted);background:var(--paper-2);padding:10px 12px;border-radius:8px}
+
+/* ---------- Moneda ---------- */
+.cur{display:inline-flex;background:var(--paper);border-radius:999px;padding:4px;gap:2px;box-shadow:inset 0 0 0 1px var(--line)}
+.cur button{border:0;background:transparent;border-radius:999px;padding:6px 14px;font-family:var(--f-mono);font-size:.78rem;font-weight:600;cursor:pointer;color:var(--muted)}
+.cur button[aria-pressed="true"]{background:var(--blue);color:var(--paper)}
+
+/* ---------- Costos ---------- */
+.costs{display:flex;flex-direction:column;gap:28px}
+.totals{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.total{background:var(--paper);border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:6px}
+.total span{font-size:.85rem;color:var(--muted)}
+.total b{font-family:var(--f-display);font-weight:400;font-size:clamp(1.6rem,4vw,2.1rem);font-variant-numeric:tabular-nums;line-height:1.1}
+.total.gift{background:var(--red);color:#FBFCFE}
+.total.gift span{color:#FBFCFE;opacity:.85}
+.tables{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px}
+.tbl-wrap{background:var(--paper);border-radius:14px;padding:18px 20px;overflow-x:auto}
+.tbl-wrap h3{font-size:1.25rem;margin-bottom:10px}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+td{padding:8px 0;border-top:1px solid var(--line);vertical-align:top}
+td.num{text-align:right;font-family:var(--f-mono);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:12px}
+td small{display:block;color:var(--muted);font-size:.78rem}
+tr.sum td{border-top:2px solid var(--ink);font-weight:700}
+tr.giftrow td:first-child{color:var(--red);font-weight:600}
+.savings{display:flex;flex-direction:column;gap:10px}
+.sav-lead,.sav-note{font-size:.92rem;color:var(--muted);max-width:70ch}
+.sav-lead b,.sav-note b{color:var(--ink)}
+td.save{color:var(--ok)}
+.foot{font-size:.82rem;color:var(--muted);text-align:center;max-width:680px;margin:0 auto}
+
+@media (max-width:760px){
+  .hero{padding-top:96px}
+  .turtle{left:-2%;top:-30%}
+  .pass{grid-template-columns:1fr}
+  .pass-stub{border-left:0;border-top:2px dashed var(--line)}
+  .pass::before,.pass::after{display:none}
+  .trip{grid-template-columns:1fr}
+  .route{position:static;flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:6px;scroll-snap-type:x mandatory}
+  .stop{grid-template-columns:1fr;flex:none;scroll-snap-align:start}
+  .stop-rail,.stop-leg{display:none}
+  .stop-btn{background:var(--paper);min-width:132px}
+  .stop-btn[aria-pressed="true"]{background:var(--blue);color:var(--paper)}
+  .stop-btn[aria-pressed="true"] .stop-meta,.stop-btn[aria-pressed="true"] em{color:var(--paper)}
+  .item{grid-template-columns:52px minmax(0,1fr)}
+  .item .cost{grid-column:2}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}.env-cut{display:none}}
+</style>
+
+</head>
+<body>
+<main>
+  <section class="hero" aria-label="Sobre">
+    <div class="env" id="env">
+      <div class="env-back"></div>
+      <div class="env-card" aria-hidden="true"><span class="hb">Feliz cumpleaños</span><span class="hb-sub">tu regalo te espera abajo</span></div>
+      <div class="env-front"></div>
+      <div class="env-flap"></div>
+      <div class="env-address">
+        <span class="par-avion">Par avion · Correo aéreo</span>
+        <span class="to">Para mi Tortuga Hembra</span>
+        <span class="from">De: Jeikson</span>
+      </div>
+      <div class="postmark">FELIZ<br>CUMPLE<br>AÑOS</div>
+      <div class="stamp" aria-hidden="true"><b>BOG</b>→ EUROPA<br>2027</div>
+      <div class="env-cut" aria-hidden="true"></div>
+      <svg class="turtle" viewBox="0 0 160 110" aria-hidden="true">
+        <ellipse class="t-body" cx="44" cy="92" rx="13" ry="9"/>
+        <ellipse class="t-body" cx="100" cy="92" rx="13" ry="9"/>
+        <path class="t-body" d="M14 74 L2 80 L16 82 Z"/>
+        <path class="t-shell" d="M14 80 Q16 30 72 28 Q128 30 130 80 Z"/>
+        <path class="t-hex" d="M58 44 L72 38 L86 44 L86 58 L72 64 L58 58 Z"/>
+        <path class="t-hex" d="M34 58 L46 52 L56 60 L54 74 L40 76 L30 68 Z"/>
+        <path class="t-hex" d="M88 60 L98 52 L110 58 L114 70 L104 76 L90 74 Z"/>
+        <path class="t-hex" d="M58 66 L72 70 L86 66 L86 78 L58 78 Z"/>
+        <rect class="t-body" x="10" y="76" width="124" height="9" rx="4.5"/>
+        <path class="t-scarf" d="M126 66 Q136 72 146 66 L148 72 Q137 79 125 73 Z"/>
+        <path class="t-scarf t-tail" d="M128 71 L120 90 L127 89 L133 74 Z"/>
+        <g class="t-wind"><path d="M2 40 H22"/><path d="M8 54 H30"/><path d="M0 66 H16"/></g>
+        <circle class="t-body" cx="138" cy="52" r="17"/>
+        <path class="t-cap" d="M121 50 Q123 31 140 32 Q156 33 156 49 Q140 42 121 50 Z"/>
+        <circle class="t-goggle" cx="134" cy="40" r="5"/><circle class="t-goggle" cx="146" cy="40" r="5"/>
+        <circle class="t-eye" cx="144" cy="53" r="2.6"/>
+        <circle class="t-cheek" cx="149" cy="60" r="3.4"/>
+        <path class="t-smile" d="M141 61 Q146 65 151 61"/>
+      </svg>
+    </div>
+    <button class="open-btn" id="openBtn" type="button">Abrir el sobre</button>
+  </section>
+
+  <article class="letter" id="carta" aria-label="Carta">
+    <p class="eyebrow">Una carta para ti</p>
+    <h1>Feliz cumpleaños, Tortuga Hembra</h1>
+    <p>Hoy quería regalarte algo que no cabe en una caja ni se envuelve con papel: un viaje para los dos.</p>
+    <p>Gracias por caminar a mi lado, por tu paciencia, por tu risa y por convertir cualquier lugar en un hogar. Contigo hasta lo de todos los días se siente como una aventura, y quiero que la próxima sea al otro lado del océano.</p>
+    <p>Me imagino contigo viendo el atardecer en el Templo de Debod, caminando sin afán por los canales de Venecia, tomando vino caliente en un mercado navideño de Múnich y despidiéndonos del viaje frente a la Torre Eiffel iluminada. Vamos a tu ritmo, tortuga, que lo importante no es llegar rápido sino llegar juntos.</p>
+    <p>Este pase vale por los vuelos de ida y vuelta. Lo demás lo vamos a planear, ahorrar y disfrutar entre los dos.</p>
+    <p>Te amo. Feliz cumpleaños.</p>
+    <p class="sign">Jeikson<small>Con todo mi amor</small></p>
+  </article>
+
+  <section class="pass-wrap" id="pase" aria-label="Pase de abordar de regalo">
+    <div class="section-head" style="text-align:center;align-items:center">
+      <p class="eyebrow">Tu regalo</p>
+      <h2>Pase de abordar</h2>
+    </div>
+    <div class="pass">
+      <div class="pass-main">
+        <div class="pass-top">
+          <span class="pass-brand">Euro Tour <span>2027</span></span>
+          <span class="pass-tag">Regalo de cumpleaños</span>
+        </div>
+        <div class="legs">
+          <div class="leg">
+            <div class="iata"><b>BOG</b><small>Bogotá</small></div>
+            <div class="leg-line"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" transform="rotate(90 12 12)"/></svg></div>
+            <div class="iata right"><b>MAD</b><small>Madrid</small></div>
+            <div class="leg-date">IDA · DOMINGO 14 NOV 2027 · NOCHE</div>
+          </div>
+          <div class="leg">
+            <div class="iata"><b>CDG</b><small>París</small></div>
+            <div class="leg-line"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" transform="rotate(90 12 12)"/></svg></div>
+            <div class="iata right"><b>BOG</b><small>Bogotá</small></div>
+            <div class="leg-date">REGRESO · JUEVES 2 DIC 2027 · MAÑANA</div>
+          </div>
+        </div>
+        <div class="fields">
+          <div class="field"><span>Pasajera</span><b>Anyi</b></div>
+          <div class="field"><span>Acompañante</span><b>Jeikson</b></div>
+          <div class="field"><span>Vuelo</span><b>TQM 2027</b></div>
+          <div class="field"><span>Clase</span><b>Juntos</b></div>
+          <div class="field"><span>Asiento</span><b>Al lado mío</b></div>
+          <div class="field"><span>Puerta</span><b>Europa</b></div>
+        </div>
+      </div>
+      <div class="pass-stub">
+        <div>
+          <p class="vale">Vale por</p>
+          <p class="vale-big">Los vuelos de ida y vuelta para los dos</p>
+        </div>
+        <svg class="barcode" id="barcode" viewBox="0 0 220 58" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <p class="countdown" id="countdown"><b>—</b>días para despegar</p>
+      </div>
+    </div>
+    <p class="fine">Pase de regalo. Los tiquetes reales los compramos juntos en junio de 2027, cuando bajen los precios.</p>
+  </section>
+
+  <section class="trip-wrap" aria-label="Itinerario" style="display:flex;flex-direction:column;gap:28px">
+    <div class="section-head">
+      <p class="eyebrow">El plan</p>
+      <h2>18 días, 7 países, 1 tren tras otro</h2>
+      <p>Madrid, Barcelona, Roma, Florencia, Venecia, Milán, Zúrich, Múnich, Colonia, Bruselas y París. Toca una ciudad para ver sus días.</p>
+    </div>
+    <div class="trip">
+      <ol class="route" id="route"></ol>
+      <div class="days">
+        <div class="days-head">
+          <div><h3 id="cityTitle">Madrid</h3><p id="citySub"></p></div>
+          <div class="cur" role="group" aria-label="Moneda" data-cur-group></div>
+        </div>
+        <div id="dayList" style="display:flex;flex-direction:column;gap:18px"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="costs" id="costos" aria-label="Costos">
+    <div class="days-head">
+      <div class="section-head"><p class="eyebrow">Las cuentas</p><h2>Lo que cuesta el viaje</h2><p>Para los dos, con precios estimados de temporada baja y comprando con anticipación.</p></div>
+      <div class="cur" role="group" aria-label="Moneda" data-cur-group></div>
+    </div>
+    <div class="totals">
+      <div class="total"><span>Viaje completo</span><b data-eur="6446"></b></div>
+      <div class="total gift"><span>Tu regalo: los vuelos</span><b data-eur="1800"></b></div>
+      <div class="total"><span>Lo que queda por cubrir juntos</span><b data-eur="4646"></b></div>
+      <div class="total"><span>Con colchón de 10 % para imprevistos</span><b data-eur="7091"></b></div>
+    </div>
+    <div class="tables">
+      <div class="tbl-wrap"><h3>Por concepto</h3><table id="tConcept"></table></div>
+      <div class="tbl-wrap"><h3>Por ciudad</h3><table id="tCity"></table></div>
+    </div>
+    <div class="tbl-wrap savings">
+      <h3>Dónde podemos ahorrar</h3>
+      <p class="sav-lead">Si aplicamos todo, el viaje bajaría a unos <b data-eur="4590"></b> para los dos (con colchón, <b data-eur="5049"></b>). Son aproximados y algunos se cruzan un poco entre sí.</p>
+      <table id="tSave"></table>
+      <p class="sav-note"><b>Lo que no vamos a recortar:</b> los barrios seguros, la mochila de cabina en el vuelo a Roma y las 3 horas de margen en Zúrich.</p>
+    </div>
+    <p class="foot" id="rates">Tasas de octubre de 2026: 1 € = COP 3.550 · 1 US$ = COP 3.170. Los horarios y precios se confirman al comprar.</p>
+  </section>
+</main>
+
+<script>
+const DAYS = [{"key": ["mad"], "num": "Día 0", "label": "Domingo 14 nov", "title": "Despegamos desde Bogotá", "items": [["≈18:00", "Vuelo nocturno Bogotá → Madrid", 0]], "note": null}, {"key": ["mad"], "num": "Día 1", "label": "Lunes 15 nov", "title": "Llegada a Madrid", "items": [["11:30", "Llegada a Barajas. Bus Exprés Aeropuerto (~40 min) a Cibeles", 10], ["13:00", "Airbnb en el Barrio de las Letras; almuerzo de menú del día", 0], ["15:00", "Puerta del Sol, Plaza Mayor y Mercado de San Miguel", 0], ["16:30", "Catedral de la Almudena y Palacio Real por fuera", 0], ["17:30", "Templo de Debod para el atardecer", 0], ["19:30", "Gran Vía y cena; dormir temprano por el cambio de horario", 0], ["—", "Tarjetas de metro (10 viajes cada uno)", 24], ["—", "Comidas del día", 60]], "note": null}, {"key": ["mad"], "num": "Día 2", "label": "Martes 16 nov", "title": "Madrid", "items": [["10:00", "Palacio Real por dentro", 28], ["12:30", "Tapas en La Latina (Cava Baja)", 0], ["14:30", "Parque del Retiro, Palacio de Cristal, Puerta de Alcalá y Cibeles", 0], ["16:30", "Barrio de las Letras", 0], ["18:00", "Museo del Prado (gratis de 18:00 a 20:00)", 0], ["20:30", "Cena", 0], ["—", "Comidas del día", 70]], "note": null}, {"key": ["bcn"], "num": "Día 3", "label": "Miércoles 17 nov", "title": "Madrid → Barcelona", "items": [["08:00", "Tren Madrid-Atocha → Barcelona-Sants (llega 10:30)", 60], ["11:00", "Metro al Airbnb en el Eixample; tarjetas T-casual", 24], ["12:00", "Barrio Gótico, Plaça Sant Jaume y Pont del Bisbe", 0], ["13:30", "Almuerzo en el Mercado de La Boquería", 0], ["15:00", "El Born, Santa Maria del Mar y Parc de la Ciutadella", 0], ["17:00", "Atardecer en la Barceloneta", 0], ["20:00", "Cena de tapas", 0], ["—", "Comidas del día", 70]], "note": null}, {"key": ["bcn"], "num": "Día 4", "label": "Jueves 18 nov", "title": "Barcelona de Gaudí", "items": [["09:00", "Sagrada Família con audioguía", 52], ["11:30", "Hospital de Sant Pau por fuera", 0], ["12:30", "Passeig de Gràcia: Casa Batlló y La Pedrera", 0], ["14:00", "Almuerzo en Gràcia", 0], ["15:30", "Park Güell", 36], ["17:00", "Atardecer en los Búnkeres del Carmel", 0], ["20:00", "Cena", 0], ["—", "Comidas del día", 70]], "note": null}, {"key": ["rom"], "num": "Día 5", "label": "Viernes 19 nov", "title": "Barcelona → Roma", "items": [["06:30", "Salir del Airbnb; Aerobús desde Plaça Catalunya o Universitat al aeropuerto (35 min)", 14], ["09:00", "Vuelo Barcelona → Roma Fiumicino (≈1 h 50, solo mochila de cabina); estar en el aeropuerto 07:00", 120], ["11:00", "Bus Fiumicino → Termini (≈55 min)", 16], ["12:30", "Caminar 10 min al Airbnb en Monti; almuerzo", 0], ["14:30", "Fontana di Trevi y Panteón (€5 por persona)", 10], ["16:30", "Piazza Navona al atardecer (≈16:50)", 0], ["19:30", "Cena en Campo de' Fiori", 0], ["—", "Metro y bus en Roma (para los 4 días)", 20], ["—", "Comidas del día", 70]], "note": null}, {"key": ["rom"], "num": "Día 6", "label": "Sábado 20 nov", "title": "Roma antigua", "items": [["08:30", "Coliseo, entrada de 09:00 (€18 por persona; incluye Foro y Palatino)", 36], ["11:30", "Foro Romano y Palatino", 0], ["13:30", "Almuerzo en el barrio Monti", 0], ["15:00", "Piazza Venezia, Campidoglio y Circo Máximo", 0], ["16:30", "Boca de la Verdad y caminata por el río al atardecer", 0], ["19:30", "Cena en Monti", 0], ["—", "Comidas del día", 70]], "note": null}, {"key": ["rom"], "num": "Día 7", "label": "Domingo 21 nov", "title": "San Pedro y Roma barroca", "items": [["09:00", "Basílica de San Pedro (gratis; abre 07:00)", 0], ["12:00", "Ángelus del Papa en la Plaza de San Pedro (gratis)", 0], ["13:00", "Castel Sant'Angelo y su puente (exterior); almuerzo en Prati", 0], ["15:00", "Plaza de España y Via del Corso", 0], ["16:15", "Terraza del Pincio y Villa Borghese al atardecer (≈16:50)", 0], ["19:30", "Cena en Trastevere", 0], ["—", "Comidas del día", 70]], "note": "Los Museos Vaticanos cierran los domingos (salvo el último del mes), por eso van el lunes."}, {"key": ["rom", "flr"], "num": "Día 8", "label": "Lunes 22 nov", "title": "Vaticano → Florencia", "items": [["07:00", "Check-out; maletas en la consigna de Termini (≈€6 por maleta)", 12], ["08:00", "Museos Vaticanos y Capilla Sixtina (€25 por persona en línea); hombros y rodillas cubiertos", 50], ["12:15", "Metro a Termini y recoger maletas", 0], ["13:20", "Tren Frecciarossa / Italo Roma Termini → Firenze S. M. Novella (llega 14:55)", 50], ["15:30", "Airbnb en el centro, entre San Lorenzo y el Duomo (10 min a pie de la estación)", 0], ["16:00", "Duomo, Piazza della Signoria y Ponte Vecchio", 0], ["17:00", "Piazzale Michelangelo con la ciudad iluminada", 0], ["19:30", "Cena (bistecca a la florentina para compartir)", 0], ["—", "Comidas del día", 70]], "note": null}, {"key": ["flr"], "num": "Día 9", "label": "Martes 23 nov", "title": "Uffizi y Pisa", "items": [["08:15", "Galería Uffizi (€12 + €4 de reserva por persona, temporada baja)", 32], ["11:00", "Mercado Central de San Lorenzo y almuerzo", 0], ["12:30", "Tren regional Florencia → Pisa Centrale (≈1 h), ida y vuelta", 37], ["14:00", "Piazza dei Miracoli: Torre inclinada, Duomo y Baptisterio por fuera", 0], ["16:30", "Tren de regreso (llega ≈17:30)", 0], ["20:00", "Cena", 0], ["—", "Comidas del día", 70]], "note": null}, {"key": ["vce"], "num": "Día 10", "label": "Miércoles 24 nov", "title": "Florencia → Venecia (dormir en Cannaregio)", "items": [["08:40", "Tren Frecciarossa Firenze SMN → Venezia S. Lucia (llega ≈10:50)", 50], ["11:15", "Caminar 10 min al Airbnb en Cannaregio y dejar maletas", 0], ["12:00", "Vaporetto línea 1 por el Gran Canal hasta San Marcos (≈45 min)", 19], ["13:00", "Plaza San Marcos y Basílica (entrada básica ≈€3)", 6], ["14:00", "Almuerzo de cicchetti (pinchos venecianos)", 0], ["15:00", "Rialto; caminar por Cannaregio y Dorsoduro", 0], ["16:40", "Atardecer en el Ponte dell'Accademia", 0], ["21:00", "Cena en Cannaregio, a pasos del Airbnb", 0], ["—", "Comidas del día (Venecia es más cara)", 80]], "note": "En noviembre puede haber acqua alta (marea alta): lleven calzado que aguante agua. Al dormir en Venecia no pagan la tasa de acceso para visitantes de un día, y llegan y salen caminando de la estación."}, {"key": ["mil"], "num": "Día 11", "label": "Jueves 25 nov", "title": "Venecia → Milán", "items": [["08:00", "Tren Frecciarossa Venezia S. Lucia → Milano Centrale (llega ≈10:25)", 50], ["10:45", "Metro al Airbnb en Porta Venezia; dejar maletas y metro M1 al Duomo", 10], ["11:30", "Duomo y terrazas por escaleras (≈€20 por persona)", 40], ["13:30", "Galleria Vittorio Emanuele II; almuerzo de panzerotti", 0], ["15:00", "Teatro alla Scala (exterior) y barrio de Brera", 0], ["16:00", "Castello Sforzesco (patios gratis) y Parco Sempione", 0], ["18:00", "Navigli: aperitivo con picoteo (incluido en comidas)", 0], ["—", "Comidas del día", 70]], "note": null}, {"key": ["zur", "muc"], "num": "Día 12", "label": "Viernes 26 nov", "title": "Milán → Zúrich → Múnich", "items": [["06:50", "Salir del Airbnb; metro a Centrale (10 min)", 0], ["07:25", "EuroCity Milano Centrale → Zúrich HB (llega 10:43)", 80], ["10:45", "Maletas en lockers de la estación (≈CHF 9)", 10], ["11:00", "Zúrich a pie: Bahnhofstrasse, Lindenhof, Grossmünster y el lago", 0], ["12:30", "Almuerzo rápido (Suiza es cara: CHF 20–25 por persona)", 0], ["13:15", "Volver a la estación y recoger maletas", 0], ["13:33", "EuroCity Zúrich HB → München Hbf (llega ≈17:06)", 90], ["17:30", "Caminar 10 min al Airbnb en Maxvorstadt", 0], ["18:30", "Marienplatz y primer mercado navideño", 0], ["—", "Comidas del día (incluye Suiza)", 90]], "note": "Este es el día que más cuidado necesita. Entre los dos trenes hay casi 3 horas en Zúrich, así que un retraso del primero no te hace perder el segundo. En Suiza los trenes salen al minuto exacto: estar en el andén 10 minutos antes."}, {"key": ["muc"], "num": "Día 13", "label": "Sábado 27 nov", "title": "Múnich", "items": [["10:00", "Frauenkirche y Marienplatz; 11:00 carrillón del Ayuntamiento", 0], ["12:00", "Viktualienmarkt (mercado de comida, abre los sábados) y almuerzo", 0], ["13:30", "Residenz por fuera y Hofgarten", 0], ["14:30", "Jardín Inglés: surfistas del Eisbach y Torre China", 0], ["16:30", "Mercados navideños: Marienplatz, Residenz y el medieval de Wittelsbacherplatz", 0], ["19:30", "Cena en el Hofbräuhaus", 0], ["—", "Transporte en Múnich", 10], ["—", "Comidas del día", 75]], "note": "Si prefieren sumar Austria, este día se puede cambiar por Salzburgo (ver extras)."}, {"key": ["cgn"], "num": "Día 14", "label": "Domingo 28 nov", "title": "Múnich → Colonia", "items": [["08:55", "ICE München Hbf → Köln Hbf (llega ≈13:30)", 80], ["13:45", "Airbnb en Altstadt-Nord, entre la catedral y el Rin (5 min a pie)", 0], ["14:30", "Catedral de Colonia (gratis)", 0], ["15:30", "Puente Hohenzollern y orilla del Rin", 0], ["16:30", "Mercados navideños: Catedral, Alter Markt y Heumarkt (abren el domingo)", 0], ["19:00", "Cena con cerveza Kölsch", 0], ["—", "Comidas del día", 70]], "note": null}, {"key": ["bru"], "num": "Día 15", "label": "Lunes 29 nov", "title": "Colonia → Bruselas", "items": [["08:44", "Tren Köln Hbf → Bruxelles-Midi (llega ≈10:35); el mismo tiquete sirve hasta Bruxelles-Central (4 min)", 60], ["11:00", "Airbnb en el Sablon o el centro histórico (10 min a pie de Central)", 0], ["12:00", "Grand-Place, Manneken Pis y Galerías Saint-Hubert", 0], ["13:00", "Almuerzo: papas fritas belgas o mejillones", 0], ["14:30", "Mont des Arts, Catedral de San Miguel y Palacio Real por fuera", 0], ["16:00", "Waffles y chocolatería", 0], ["17:00", "Mercado navideño y show de luces en la Grand-Place", 0], ["—", "Comidas del día", 70]], "note": null}, {"key": ["par"], "num": "Día 16", "label": "Martes 30 nov", "title": "Bruselas → París", "items": [["09:20", "Tren Bruxelles-Central → Bruxelles-Midi (4 min); el embarque cierra ≈30 min antes", 6], ["10:13", "Eurostar Bruxelles-Midi → Paris-Nord (llega ≈11:35)", 90], ["12:00", "Metro línea 4 al Airbnb en el Marais (≈10 min); tiquetes de metro para 2 días", 30], ["13:00", "Almuerzo", 0], ["14:00", "Catedral de Notre-Dame (gratis)", 0], ["15:00", "Sainte-Chapelle (€22 por persona para no europeos)", 44], ["16:30", "Barrio Latino y orillas del Sena", 0], ["18:30", "Montmartre y Sacré-Cœur de noche (metro ≈15 min)", 0], ["—", "Comidas del día", 80]], "note": "El Louvre cierra los martes, por eso va el miércoles."}, {"key": ["par"], "num": "Día 17", "label": "Miércoles 1 dic", "title": "Louvre, Campos Elíseos y Torre Eiffel", "items": [["09:00", "Museo del Louvre (€32 por persona para no europeos; reservar)", 64], ["12:30", "Almuerzo", 0], ["13:30", "Jardín de las Tullerías y Place de la Concorde", 0], ["14:30", "Campos Elíseos (luces navideñas) y Arco del Triunfo por fuera", 0], ["16:30", "Torre Eiffel: 2.º piso por escaleras (€14,80 por persona)", 30], ["19:00", "Crucero de 1 h por el Sena", 32], ["21:00", "Cena de despedida", 0], ["—", "Comidas del día", 90]], "note": null}, {"key": ["par"], "num": "Día 18", "label": "Jueves 2 dic", "title": "Regreso a Bogotá", "items": [["07:15", "Check-out; caminar a Châtelet-Les Halles y RER B directo al aeropuerto CDG (≈45 min)", 28], ["08:30", "Llegar al aeropuerto 3 h antes del vuelo", 0], ["11:30", "Vuelo París → Bogotá (≈11 h); llegada ≈16:00 hora de Bogotá", 0], ["—", "Desayuno", 20]], "note": null}];
+const STOPS = [
+  {k:"mad",n:"Madrid",c:"España",d:"15–17 nov",nights:2,eur:352,leg:"tren · 2 h 30"},
+  {k:"bcn",n:"Barcelona",c:"España",d:"17–19 nov",nights:2,eur:446,leg:"vuelo · 1 h 50"},
+  {k:"rom",n:"Roma",c:"Italia",d:"19–22 nov",nights:3,eur:624,leg:"tren · 1 h 35"},
+  {k:"flr",n:"Florencia",c:"Italia",d:"22–24 nov",nights:2,eur:379,leg:"tren · 2 h 10"},
+  {k:"vce",n:"Venecia",c:"Italia",d:"24–25 nov",nights:1,eur:215,leg:"tren · 2 h 25"},
+  {k:"mil",n:"Milán",c:"Italia",d:"25–26 nov",nights:1,eur:210,leg:"tren · 3 h 20"},
+  {k:"zur",n:"Zúrich",c:"Suiza",d:"26 nov",nights:0,eur:100,leg:"tren · 3 h 35"},
+  {k:"muc",n:"Múnich",c:"Alemania",d:"26–28 nov",nights:2,eur:275,leg:"tren · 4 h 35"},
+  {k:"cgn",n:"Colonia",c:"Alemania",d:"28–29 nov",nights:1,eur:150,leg:"tren · 1 h 50"},
+  {k:"bru",n:"Bruselas",c:"Bélgica",d:"29–30 nov",nights:1,eur:161,leg:"Eurostar · 1 h 20"},
+  {k:"par",n:"París",c:"Francia",d:"30 nov – 2 dic",nights:2,eur:678,leg:null}
+];
+const CONCEPTS = [
+  ["Vuelos Bogotá → Madrid y París → Bogotá","Tu regalo de cumpleaños",1800,true],
+  ["Trenes, vuelo Barcelona–Roma y transporte local","",978],
+  ["Airbnb en barrios seguros","17 noches",1595],
+  ["Tasas turísticas","",130],
+  ["Entradas y actividades","Coliseo, Vaticano, Louvre, Sagrada Família y más",460],
+  ["Comidas","≈€35 por persona al día",1265],
+  ["Consignas de maletas","",58],
+  ["Seguro de viaje","",120],
+  ["ETIAS (permiso para entrar a Europa)","€20 por persona",40]
+];
+const SAVINGS = [
+  ["Salir el martes 16 en vez del domingo 14","Sin contar lo que bajen los tiquetes",350],
+  ["Habitación privada en Airbnb en vez de apartamento entero","Mismos barrios seguros",480],
+  ["Cocinar desayunos y algunas cenas","Comidas de €25 por persona al día en vez de €35",360],
+  ["Vuelos en promoción o con una escala","≈€750 por persona en vez de €900",300],
+  ["Quitar Colonia","Múnich → Bruselas directo y regreso el miércoles 1",170],
+  ["Seguro de viaje incluido en una tarjeta de crédito","Verificar la cobertura",120],
+  ["Saltar Sainte-Chapelle y el crucero por el Sena","Ver el Sena desde los puentes",76]
+];
+const RATE_COP = 3550, RATE_USD = 3550/3170;
+let cur = "COP";
+try { const s = localStorage.getItem("cur"); if (s) cur = s; } catch(e) {}
+
+function money(eur){
+  if (cur === "COP") return "$" + (Math.round(eur*RATE_COP/1000)*1000).toLocaleString("es-CO");
+  if (cur === "USD") return "US$" + Math.round(eur*RATE_USD).toLocaleString("es-CO");
+  return "€" + eur.toLocaleString("es-CO",{maximumFractionDigits:2});
+}
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* Moneda */
+document.querySelectorAll("[data-cur-group]").forEach(g => {
+  ["COP","EUR","USD"].forEach(c => {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = c; b.dataset.cur = c;
+    b.addEventListener("click", () => { cur = c; try{localStorage.setItem("cur",c)}catch(e){} renderMoney(); });
+    g.appendChild(b);
+  });
+});
+
+/* Ruta */
+let city = "mad";
+const route = document.getElementById("route");
+STOPS.forEach(s => {
+  const li = document.createElement("li");
+  li.className = "stop";
+  li.innerHTML = `<div class="stop-rail"><span class="stop-dot"></span><span class="stop-bar"></span></div>
+    <div><button type="button" class="stop-btn" data-k="${s.k}" aria-pressed="false">
+      <span class="stop-name">${esc(s.n)} <em>${s.nights ? s.nights + (s.nights>1?" noches":" noche") : "de paso"}</em></span>
+      <span class="stop-meta">${esc(s.c)} · ${esc(s.d)}</span></button>
+      ${s.leg ? `<div class="stop-leg">↓ ${esc(s.leg)}</div>` : ""}</div>`;
+  route.appendChild(li);
+});
+route.addEventListener("click", e => {
+  const b = e.target.closest(".stop-btn"); if (!b) return;
+  city = b.dataset.k; renderDays();
+});
+
+function renderDays(){
+  document.querySelectorAll(".stop-btn").forEach(b => b.setAttribute("aria-pressed", b.dataset.k === city));
+  const s = STOPS.find(x => x.k === city);
+  document.getElementById("cityTitle").textContent = s.n;
+  document.getElementById("citySub").innerHTML = `${esc(s.c)} · ${esc(s.d)} · ${s.nights ? s.nights + (s.nights>1?" noches":" noche") : "de paso, sin dormir"} · <span data-eur="${s.eur}"></span> con hospedaje`;
+  const list = document.getElementById("dayList");
+  list.innerHTML = DAYS.filter(d => d.key.includes(city)).map(d => {
+    const tot = d.items.reduce((a,r) => a + r[2], 0);
+    return `<article class="day">
+      <div class="day-top"><div><div class="day-num">${esc(d.num)} · ${esc(d.label)}</div><h4 class="day-title">${esc(d.title)}</h4></div>
+      ${tot ? `<div class="day-total"><span>Total del día</span><b data-eur="${tot}"></b></div>` : ""}</div>
+      <ul class="items">${d.items.map(r => `<li class="item"><time>${esc(r[0])}</time><span>${esc(r[1])}</span><span class="cost">${r[2] ? `<span data-eur="${r[2]}"></span>` : ""}</span></li>`).join("")}</ul>
+      ${d.note ? `<p class="day-note">${esc(d.note)}</p>` : ""}
+    </article>`;
+  }).join("");
+  renderMoney();
+}
+
+function renderTables(){
+  const tc = document.getElementById("tConcept");
+  const ctot = CONCEPTS.reduce((a,r) => a + r[2], 0);
+  tc.innerHTML = CONCEPTS.map(r => `<tr class="${r[3]?"giftrow":""}"><td>${esc(r[0])}${r[1]?`<small>${esc(r[1])}</small>`:""}</td><td class="num" data-eur="${r[2]}"></td></tr>`).join("")
+    + `<tr class="sum"><td>Total del viaje</td><td class="num" data-eur="${ctot}"></td></tr>`;
+  const ts = document.getElementById("tSave");
+  const stot = SAVINGS.reduce((a,r) => a + r[2], 0);
+  ts.innerHTML = SAVINGS.map(r => `<tr><td>${esc(r[0])}<small>${esc(r[1])}</small></td><td class="num save" data-eur="${r[2]}"></td></tr>`).join("")
+    + `<tr class="sum"><td>Total si aplicamos todo</td><td class="num save" data-eur="${stot}"></td></tr>`;
+  const tk = document.getElementById("tCity");
+  const legs = 730;
+  const ktot = STOPS.reduce((a,s) => a + s.eur, 0) + legs;
+  tk.innerHTML = STOPS.map(s => `<tr><td>${esc(s.n)}<small>${s.nights ? s.nights + (s.nights>1?" noches":" noche") : "de paso"}</small></td><td class="num" data-eur="${s.eur}"></td></tr>`).join("")
+    + `<tr><td>Trenes y vuelo entre ciudades</td><td class="num" data-eur="${legs}"></td></tr>`
+    + `<tr class="sum"><td>Total en Europa<small>Sin vuelos internacionales, seguro ni ETIAS</small></td><td class="num" data-eur="${ktot}"></td></tr>`;
+}
+
+function renderMoney(){
+  document.querySelectorAll("[data-eur]").forEach(el => el.textContent = money(Number(el.dataset.eur)));
+  document.querySelectorAll("[data-cur]").forEach(b => b.setAttribute("aria-pressed", b.dataset.cur === cur));
+}
+
+/* Código de barras decorativo */
+(function(){
+  const svg = document.getElementById("barcode");
+  const seed = "BOGMAD14112027CDGBOG02122027TQM";
+  let x = 0, out = "", i = 0;
+  while (x < 220) {
+    const c = seed.charCodeAt(i % seed.length);
+    const w = 1 + (c % 4), gap = 1 + ((c >> 2) % 3);
+    out += `<rect x="${x}" y="0" width="${w}" height="58"/>`;
+    x += w + gap; i++;
+  }
+  svg.innerHTML = out;
+})();
+
+/* Cuenta regresiva */
+(function(){
+  const dep = new Date("2027-11-14T18:00:00-05:00");
+  const days = Math.max(0, Math.ceil((dep - new Date()) / 86400000));
+  document.querySelector("#countdown b").textContent = days.toLocaleString("es-CO");
+})();
+
+/* Abrir el sobre */
+const env = document.getElementById("env"), btn = document.getElementById("openBtn");
+btn.addEventListener("click", () => {
+  if (!env.classList.contains("open")) {
+    env.classList.add("open");
+    btn.textContent = "Leer la carta";
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setTimeout(() => document.getElementById("carta").scrollIntoView({behavior: reduce ? "auto" : "smooth", block:"start"}), reduce ? 0 : 3400);
+  } else {
+    document.getElementById("carta").scrollIntoView({behavior:"smooth", block:"start"});
+  }
+});
+
+renderTables();
+renderDays();
+</script>
+
+</body>
+</html>
