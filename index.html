@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<style>[hidden]{display:none!important}html{color-scheme:light dark}body{margin:0}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 <title>Para mi Tortuga Hembra</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@500;700&display=swap">
@@ -40,7 +40,8 @@ button{font:inherit;color:inherit}
 /* ---------- Sobre ---------- */
 .hero{display:flex;flex-direction:column;align-items:center;gap:28px;padding-top:120px;text-align:center;overflow-x:clip}
 .hero-kicker{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.env{position:relative;width:min(560px,100%);aspect-ratio:1.62;perspective:1400px}
+.env{position:relative;width:min(560px,100%);aspect-ratio:1.62;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.env.open{cursor:default}
 .env-back{position:absolute;inset:0;border-radius:8px;background:var(--paper-2);
   border:12px solid transparent;
   border-image:repeating-linear-gradient(135deg,var(--red) 0 16px,var(--paper) 16px 22px,var(--blue) 22px 38px,var(--paper) 38px 44px) 12;
@@ -56,7 +57,7 @@ button{font:inherit;color:inherit}
   clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top center;
   transition:transform .7s cubic-bezier(.3,.7,.2,1), z-index 0s .35s}
 .env-flap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(20,33,61,.08))}
-.env.open .env-flap{transform:rotateX(180deg);z-index:1;transition-delay:1.35s,1.7s}
+.env.open .env-flap{transform:scaleY(-1);z-index:1;transition-delay:1.35s,1.7s}
 .env.open .env-card{transform:translateY(-62%);transition-delay:1.9s}
 /* la tortuga corta el sobre volando */
 .env-cut{position:absolute;z-index:7;left:12px;right:12px;top:10px;height:3px;transform:scaleX(0);transform-origin:left center;
@@ -81,7 +82,7 @@ button{font:inherit;color:inherit}
 .env-address{position:absolute;z-index:5;left:9%;right:32%;bottom:9%;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:2px;pointer-events:none}
 .env-address .to{font-family:var(--f-hand);font-size:clamp(1.5rem,5.2vw,2.4rem);line-height:1.05}
 .env-address .from{font-family:var(--f-hand);font-size:clamp(1.1rem,3.4vw,1.4rem);color:var(--muted)}
-.par-avion{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);border:1.5px solid var(--blue);padding:2px 8px;border-radius:3px;margin-bottom:8px}
+.par-avion{white-space:nowrap;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);border:1.5px solid var(--blue);padding:2px 8px;border-radius:3px;margin-bottom:8px}
 .stamp{position:absolute;z-index:5;right:9%;bottom:12%;width:clamp(64px,16%,88px);aspect-ratio:.82;background:var(--stamp);
   outline:3px dotted var(--paper);outline-offset:-5px;display:flex;flex-direction:column;align-items:center;justify-content:center;
   color:#FBFCFE;font-family:var(--f-mono);font-size:clamp(.55rem,1.6vw,.7rem);line-height:1.25;letter-spacing:.06em;transform:rotate(4deg)}
@@ -92,6 +93,9 @@ button{font:inherit;color:inherit}
 .open-btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;background:var(--red);color:#FBFCFE;
   padding:14px 28px;font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 10px 24px -12px var(--red)}
 .open-btn:hover{filter:brightness(1.07)}
+.open-btn.pulse{animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--red) 55%,transparent)}50%{box-shadow:0 0 0 14px color-mix(in srgb,var(--red) 0%,transparent)}}
+.tap-hint{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:-14px}
 
 /* ---------- Carta ---------- */
 .letter{max-width:680px;width:100%;margin:0 auto;background:var(--paper);border-radius:4px;padding:clamp(28px,6vw,56px);
@@ -215,7 +219,7 @@ td.save{color:var(--ok)}
   .item{grid-template-columns:52px minmax(0,1fr)}
   .item .cost{grid-column:2}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}.env-cut{display:none}}
+@media (prefers-reduced-motion:reduce){.turtle{animation:none}.open-btn.pulse{animation:none}.env.open .turtle{animation:flyturtle-soft 1.4s ease-in-out .2s forwards}@keyframes flyturtle-soft{0%{left:-3%}100%{left:72%}}.env.open .turtle .t-tail{animation:none}}
 </style>
 
 </head>
@@ -228,7 +232,7 @@ td.save{color:var(--ok)}
       <div class="env-front"></div>
       <div class="env-flap"></div>
       <div class="env-address">
-        <span class="par-avion">Par avion · Correo aéreo</span>
+        <span class="par-avion">Correo aéreo</span>
         <span class="to">Para mi Tortuga Hembra</span>
         <span class="from">De: Jeikson</span>
       </div>
@@ -256,7 +260,8 @@ td.save{color:var(--ok)}
         <path class="t-smile" d="M141 61 Q146 65 151 61"/>
       </svg>
     </div>
-    <button class="open-btn" id="openBtn" type="button">Abrir el sobre</button>
+    <button class="open-btn pulse" id="openBtn" type="button">Abrir el sobre</button>
+    <p class="tap-hint" id="tapHint">Toca el sobre o el botón</p>
   </section>
 
   <article class="letter" id="carta" aria-label="Carta">
@@ -496,16 +501,17 @@ function renderMoney(){
 
 /* Abrir el sobre */
 const env = document.getElementById("env"), btn = document.getElementById("openBtn");
-btn.addEventListener("click", () => {
-  if (!env.classList.contains("open")) {
-    env.classList.add("open");
-    btn.textContent = "Leer la carta";
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setTimeout(() => document.getElementById("carta").scrollIntoView({behavior: reduce ? "auto" : "smooth", block:"start"}), reduce ? 0 : 3400);
-  } else {
-    document.getElementById("carta").scrollIntoView({behavior:"smooth", block:"start"});
-  }
-});
+function goLetter(){ document.getElementById("carta").scrollIntoView({behavior:"smooth", block:"start"}); }
+function openEnvelope(){
+  if (env.classList.contains("open")) { goLetter(); return; }
+  env.classList.add("open");
+  btn.classList.remove("pulse");
+  btn.textContent = "Leer la carta";
+  document.getElementById("tapHint").hidden = true;
+  setTimeout(goLetter, 3600);
+}
+btn.addEventListener("click", openEnvelope);
+env.addEventListener("click", () => { if (!env.classList.contains("open")) openEnvelope(); });
 
 renderTables();
 renderDays();
